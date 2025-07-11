@@ -1,48 +1,57 @@
-# Autonomous_Self_Driving_Cars
-A Computer Vision project using Neural Networks
-## Overview
+# 🚗Drivewise | Autonomous Self-Driving Cars
+*A Computer Vision–based project leveraging Neural Networks*
 
-This project aims to develop a self-driving car system using computer vision techniques and neural networks. Initially, data is collected using the Udacity simulator, following which it is preprocessed to remove biases. We draw inspiration from Nvidia's 2016 [research paper](https://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf) on end-to-end deep learning for self-driving cars.
 
-## Data Collection
+## 🧠 Overview
 
-Data collection is performed using the Udacity simulator, which provides a realistic environment for training the model. The simulator allows users to drive a virtual car and records data such as images and corresponding steering angles, throttle, reverse and speed in a CSV file.
+This project builds an autonomous driving system using computer vision and deep learning. Leveraging the Udacity simulator, we collect and preprocess driving data to eliminate bias. The architecture and training methodology are inspired by Nvidia’s 2016 paper on end-to-end deep learning for self-driving cars.
 
-To collect data, follow these steps:
-1. Download the Udacity simulator executable file [Check out their github repo](https://github.com/udacity/self-driving-car-sim.git).
-2. Run the simulator on your system and navigate through various scenarios to capture diverse driving conditions.
 
-## Model Training
+## 📸 Data Collection
 
-Following the approach outlined in Nvidia's paper, we train a neural network model on the collected data. The model is trained to predict steering angles directly from images, effectively learning the mapping from raw sensory data to steering commands.
+Training data is captured through the Udacity simulator, which replicates real-world driving conditions. As you manually drive the virtual car, the simulator records:
 
-The trained model is saved in an HDF5 file format using keras.
+- Camera images
+- Steering angles
+- Throttle, brake, and speed
 
-## Simulation and Real-Time Control
+All data is saved into a CSV log file for further processing.
 
-Initially, the model is deployed in the Udacity simulator to observe its performance. However, it becomes apparent that the model may be overfitted to the specific tracks in the simulator.
+**Steps to collect data:**
+1. Download the Udacity simulator executable.
+2. Run the simulator and drive through various tracks to gather diverse driving scenarios.
+3. The simulator automatically logs the data into the appropriate directory.
 
-To address this issue, we shift our focus to edge detection techniques for self-driving cars. Real-time screenshots of the car's video feed are captured, preprocessed using OpenCV, and subjected to Canny edge detection algorithm developed by John F. Canny in 1986. 
 
-The edges are further processed to derive their derivative, and based on the positive-to-negative ratio, control commands are generated using Python's `keyboard` module.
+## 🧠 Model Training
 
-## Usage
+We use an end-to-end learning approach, training a Convolutional Neural Network (CNN) to predict steering angles from input images. The model learns to associate raw visual input with driving actions. The trained model is saved in HDF5 format using Keras.
 
-To run the project, follow these steps:
 
-1. Ensure you have all the necessary dependencies installed. You can find the requirements in the `requirements.txt` file.
-2. Launch the Udacity simulator and run the `drive.py` file to connect it to the Python script using SocketIO and Flask.
-3. Select a track on the autonomous mode and see the car drive itself.
-4. Now, download Trackmania and build a track for the lane detection algorithm.
-5. Execute the main script, which will capture real-time screenshots, process them, and generate control commands for the car.
+## 🕹️ Simulation & Real-Time Control
 
-## Demo Video 
-https://youtu.be/oW5gA0JFwbM
+After training, the model is integrated back into the simulator to test autonomous driving capabilities. Initial tests revealed some overfitting to specific tracks, prompting further improvements.
 
-## Acknowledgments
+**To enhance generalization, we implemented an edge detection–based control mechanism:**
+- Real-time frames are captured from the simulator’s video feed.
+- OpenCV applies Canny edge detection (developed by John F. Canny in 1986).
+- Edge patterns are analyzed and converted into control signals using Python’s keyboard module.
 
-This project builds upon the work of Nvidia's research paper on end-to-end learning for self-driving cars. We also thank the creators of the Udacity simulator for providing a valuable platform for data collection and testing. We also thank @entBabby for their comprehensive tutorial on self-driving car using Convolutional Neural Network.
 
-## Contributing
+## ⚙️ How to Run
 
-Contributions are welcome! If you have any ideas for improvement or want to report issues, feel free to open an issue or submit a pull request.
+1. Install all dependencies listed in `requirements.txt`.
+2. Launch the Udacity simulator and run `drive.py` to establish communication via Flask + SocketIO.
+3. Select a track in autonomous mode to watch the car drive itself using the trained model.
+4. *(Optional)* Download Trackmania to test lane detection using edge-based logic.
+5. Run the edge-detection script to capture, process, and steer in real-time.
+
+
+## 🎥 Demo
+
+Watch the demo video : https://youtu.be/oW5gA0JFwbM
+
+
+## 🤝 Contributing
+
+We welcome contributions! If you’d like to improve the model or suggest enhancements, feel free to open an issue or submit a pull request.
